@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Hack Simulation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+        }
+
+        .matrix-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            overflow: hidden;
+        }
+
+        .matrix-line {
+            position: absolute;
+            top: -100%;
+            width: 1px;
+            height: 100%;
+            background: #00ff00;
+            animation: drop 2.5s infinite;
+        }
+
+        @keyframes drop {
+            from { top: -100%; }
+            to { top: 100%; }
+        }
+
+        .matrix-line:nth-child(1) { left: 10%; animation-duration: 4s; }
+        .matrix-line:nth-child(2) { left: 20%; animation-duration: 3s; }
+        .matrix-line:nth-child(3) { left: 30%; animation-duration: 2s; }
+        .matrix-line:nth-child(4) { left: 40%; animation-duration: 4.5s; }
+        .matrix-line:nth-child(5) { left: 50%; animation-duration: 2.8s; }
+        .matrix-line:nth-child(6) { left: 60%; animation-duration: 3.5s; }
+        .matrix-line:nth-child(7) { left: 70%; animation-duration: 3.2s; }
+        .matrix-line:nth-child(8) { left: 80%; animation-duration: 2.5s; }
+
+        .terminal-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .terminal {
+            width: 80%;
+            max-width: 1200px;
+            height: 80%;
+            background-color: black;
+            border: 2px solid #00ff00;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            position: relative;
+        }
+
+        .line {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .hacker-typing {
+            border-right: 2px solid #00ff00;
+            animation: blink-caret 0.7s step-end infinite;
+            display: inline-block;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #00ff00; }
+        }
+
+        /* Custom Scrollbar */
+        .terminal::-webkit-scrollbar {
+            width: 8px;
+        }
+        .terminal::-webkit-scrollbar-thumb {
+            background: #00ff00;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="matrix-background">
+    <!-- Matrix effect lines -->
+    <div class="matrix-line"></div>
+    <div class="matrix-line"></div>
+    <div class="matrix-line"></div>
+    <div class="matrix-line"></div>
+    <div class="matrix-line"></div>
+    <div class="matrix-line"></div>
+    <div class="matrix-line"></div>
+    <div class="matrix-line"></div>
+</div>
+
+<div class="terminal-container">
+    <div class="terminal" id="terminal">
+        <!-- Hacking log will be displayed here -->
+    </div>
+</div>
+
+<script>
+    const terminal = document.getElementById('terminal');
+
+    // New detailed hacking server commands and logs
+    const commands = [
+        ">_ Connecting to remote server 198.51.100.55...",
+        ">_ Connection established. Handshaking...",
+        ">_ Access granted. Authentication bypass successful.",
+        ">_ Running reconnaissance on target system...",
+        ">_ Network mapping in progress...",
+        ">_ Detected open ports: 22 (SSH), 80 (HTTP), 443 (HTTPS), 3306 (MySQL)",
+        ">_ Exploiting SSH vulnerability (CVE-2021-12345)...",
+        ">_ SSH vulnerability exploited. Root access granted.",
+        ">_ Installing backdoor on remote system...",
+        ">_ Backdoor installation complete.",
+        ">_ Uploading malware to /var/www/html/uploads/malware_package.tar.gz...",
+        ">_ Malware uploaded successfully.",
+        ">_ Extracting malware package...",
+        ">_ Executing payload to disable firewall...",
+        ">_ Firewall disabled.",
+        ">_ Initiating data exfiltration process...",
+        ">_ Downloading sensitive database records...",
+        ">_ Decrypting database records...",
+        ">_ Decryption complete. Data exfiltration in progress...",
+        ">_ Data exfiltrated to local machine.",
+        ">_ Modifying web server configuration to allow remote code execution...",
+        ">_ Web server configuration modified. RCE enabled.",
+        ">_ Initiating denial of service attack on secondary IP (198.51.100.45)...",
+        ">_ DOS attack initiated...",
+        ">_ Target IP 198.51.100.45 is down.",
+        ">_ Installing ransomware on remote system...",
+        ">_ Ransomware deployed successfully.",
+        ">_ Encrypting target system files...",
+        ">_ Encryption complete. Displaying ransom note to user...",
+        ">_ Ransom note displayed. Demanding payment in Bitcoin.",
+        ">_ Initiating cover-up process...",
+        ">_ Deleting logs and hiding tracks...",
+        ">_ Logs deleted successfully.",
+        ">_ Hacking operation complete. Disconnecting from server...",
+        ">_ Connection terminated. Exiting system.",
+    ];
+
+    let currentIndex = 0;
+
+    function typeCommand() {
+        if (currentIndex < commands.length) {
+            const p = document.createElement('p');
+            p.classList.add('line');
+            p.textContent = commands[currentIndex];
+            terminal.appendChild(p);
+            terminal.scrollTop = terminal.scrollHeight;
+            currentIndex++;
+            setTimeout(typeCommand, 1800);  // Delay between each command
+        } else {
+            const endLine = document.createElement('p');
+            endLine.classList.add('line');
+            endLine.innerHTML = ">_ <span class='hacker-typing'></span>";
+            terminal.appendChild(endLine);
+        }
+    }
+
+    // Start the typing simulation
+    setTimeout(typeCommand, 1000);
+
+</script>
+
+</body>
+</html>
